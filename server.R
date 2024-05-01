@@ -1,14 +1,23 @@
 #server
 
 server <- function(input, output, session) {
-  credentials <- shinyauthr::loginServer(
-    id = "login",
-    data = user_base,
-    user_col = user,
-    pwd_col = password,
-    sodium_hashed = TRUE,
-    log_out = reactive(logout_init())
-  )
+  
+  credentials <- callModule(shinyauthr::login, "login", 
+                            data = user_base,
+                            user_col = user,
+                            pwd_col = password,
+                            sodium_hashed = T,
+                            log_out = reactive(logout_init()))
+  
+  logout_init <- callModule(shinyauthr::logout, "logout", reactive(credentials()$user_auth))
+  
+  observe({
+    if(credentials()$user_auth) {
+      shinyjs::removeClass(selector = "body", class = "sidebar-collapse")
+    } else {
+      shinyjs::addClass(selector = "body", class = "sidebar-collapse")
+    }
+  })
   
   listed_conn <- list(drv = RPostgres::Postgres(),
                       host     = '81.31.246.77',
@@ -32,10 +41,7 @@ server <- function(input, output, session) {
   
   ls <- processor(getter(listed_conn))
   
-  logout_init <- shinyauthr::logoutServer(
-    id = "logout",
-    active = reactive(credentials()$user_auth)
-  )
+ 
   
   observe({
     invalidateLater(5000)

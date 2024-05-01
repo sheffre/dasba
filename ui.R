@@ -1,15 +1,9 @@
 #UI
 
 ui <- page_sidebar(
+  shinyjs::useShinyjs(),
   
-  # login section
-  shinyauthr::loginUI(id = "login",
-                      title = "Пожалуйста, введите имя пользователя и пароль:",
-                      user_title = "Имя пользователя:",
-                      pass_title = "Пароль:",
-                      login_title = "Войти",
-                      error_message = "Ошибка: неверное имя пользователя или пароль!",
-                      cookie_expiry = 7),
+ 
   
   
   title = titlePanel(div("Просмотр данных газоанализатора SBA-5", style = "text-align: center")),
@@ -22,6 +16,9 @@ ui <- page_sidebar(
                     actionBttn('plot_upd', "Обновить график хода"),
                     position = 'right'),
   fluidRow(
+    # login section
+    shinyauthr::loginUI("login"),
+    
     plotlyOutput('plot', height = "500px"),
     layout_columns(
       card(card_header("Текущие значения содержания CO2", style = "text-align: center"),

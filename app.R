@@ -38,6 +38,8 @@ db_users_con <- tibble::tibble(
   password_cal = c("polukhin_dasba_cal", "khoroshilov_dasba_cal")
 )
 
+source("ui.R")
+source("server.R")
 
 dasba <- shinyApp(ui, server)
 shiny::runApp(dasba, 

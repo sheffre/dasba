@@ -18,6 +18,7 @@ WHERE timestamp >= (DATE_TRUNC('day', CURRENT_TIMESTAMP AT TIME ZONE 'GMT+3') - 
   
   df <- dbGetQuery(conn, query)
   df$timestamp <- as.POSIXct(df$timestamp, tz = "Europe/Moscow")
+  dbDisconnect(conn)
   return(df)
 }
 
@@ -32,7 +33,7 @@ processor <- function(df) {
 
 plotter_plotly <- function(method, ls) {
   switch(method,
-         "sec" = {fig <- plot_ly(ls$df, type = "scatter", mode = "lines") %>%
+         "sec" = {fig <- plot_ly(ls$df, type = "scatter", mode = "lines", height = 600) %>%
            add_trace(x = ~timestamp, y = ~co2_partial_pressure, name = 'Содержание CO2',
                      hovertemplate = 'pCO2: %{y:ppm}\nВремя: %{x}<extra></extra>')%>%
            layout(showlegend = F)
@@ -56,7 +57,7 @@ plotter_plotly <- function(method, ls) {
          
          },
          "5min" = {
-           fig <- plot_ly(ls$df_5min, type = "scatter", mode = "lines") %>%
+           fig <- plot_ly(ls$df_5min, type = "scatter", mode = "lines", height = 600) %>%
              add_trace(x = ~timestamp_rounded, 
                        y = ~co2_partial_pressure, 
                        name = 'Содержание CO2',
