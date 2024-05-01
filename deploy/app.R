@@ -1,5 +1,7 @@
 #second try
 options(repos=c(CRAN="https://cran.r-project.org"))
+options(shiny.port = 7775)
+options(shiny.host = "82.97.241.77")
 
 source("source_functions.R")
 
