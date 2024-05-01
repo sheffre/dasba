@@ -1,4 +1,6 @@
 #second try
+options(repos=c(CRAN="https://cran.r-project.org"))
+
 source("source_functions.R")
 
 required_packages <- c("shiny",
