@@ -1,6 +1,19 @@
 #second try
 source("source_functions.R")
 
+required_packages <- c("shiny",
+                       "bslib",
+                       "DBI",
+                       "RPostgres",
+                       "lubridate",
+                       "shinyWidgets",
+                       "plotly",
+                       "daterangepicker",
+                       "shinyauthr")
+
+
+lapply(required_packages, install_if_missing)
+
 library(shiny)
 library(shinydashboard)
 library(bslib)
