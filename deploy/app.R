@@ -1,8 +1,9 @@
 #second try
 options(repos=c(CRAN="https://cran.r-project.org"))
-options(shiny.port = 7775)
+options(shiny.port = 3838)
 options(shiny.host = "82.97.241.77")
 
+setwd("/srv/shiny-server/dasba")
 source("source_functions.R")
 
 required_packages <- c("shiny",
@@ -29,10 +30,10 @@ library(RPostgres)
 library(lubridate)
 library(shinyWidgets)
 library(plotly)
-library(daterangepicker)
 library(shinyauthr)
 library(shinyjs)
 library(DT)
+library(daterangepicker)
 
 source("users.R")
 

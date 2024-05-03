@@ -1,3 +1,17 @@
+library(shiny)
+library(shinydashboard)
+library(bslib)
+library(DBI)
+library(RPostgres)
+library(lubridate)
+library(shinyWidgets)
+library(plotly)
+library(shinyauthr)
+library(shinyjs)
+library(DT)
+library(daterangepicker)
+
+
 server <- function(input, output, session) {
   # login status and info will be managed by shinyauthr module and stores here
   credentials <- callModule(shinyauthr::login, "login", 

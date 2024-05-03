@@ -1,7 +1,16 @@
+library(shiny)
 library(shinydashboard)
-library(shinyjs)
+library(bslib)
+library(DBI)
+library(RPostgres)
+library(lubridate)
+library(shinyWidgets)
+library(plotly)
 library(shinyauthr)
+library(shinyjs)
 library(DT)
+library(daterangepicker)
+
 
 ui <- dashboardPage(
   skin = "green",
