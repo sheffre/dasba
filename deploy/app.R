@@ -14,7 +14,9 @@ required_packages <- c("shiny",
                        "plotly",
                        "daterangepicker",
                        "shinyauthr",
-                       "shinydashboard")
+                       "shinydashboard", 
+                       "DT", 
+                       "shinyjs")
 
 
 lapply(required_packages, install_if_missing)
@@ -29,6 +31,8 @@ library(shinyWidgets)
 library(plotly)
 library(daterangepicker)
 library(shinyauthr)
+library(shinyjs)
+library(DT)
 
 source("users.R")
 
